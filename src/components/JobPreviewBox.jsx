@@ -22,6 +22,7 @@ export default function JobPreviewBox(props) {
       }
     }
   };
+
   console.log(props.job);
   return (
     <div>

@@ -77,7 +77,7 @@ input {
   margin: 5% auto; /* 15% from the top and centered */
   padding: 20px;
   /* border: 1px solid #9e9e9e; */
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 95%; /* Could be more or less, depending on screen size */
   border-radius: 3px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
@@ -203,7 +203,7 @@ select {
   margin: 5% auto; /* 15% from the top and centered */
   padding: 20px;
   /* border: 1px solid #9e9e9e; */
-  width: 90%; /* Could be more or less, depending on screen size */
+  width: 95%; /* Could be more or less, depending on screen size */
   border-radius: 3px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
@@ -212,16 +212,100 @@ select {
   cursor: pointer;
 }
 
-.job-page-top-bar {
+.client-name {
+  font-size: 40px;
+  margin: 0;
+  font-weight: bold;
+}
+
+/* CSS for the button container */
+.button-container {
+  float: right;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
-.top-bar-right {
-  width: 100px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+/* CSS for the buttons */
+.button {
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  background-color: #ccc; /* Neutral color */
+  border: none;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+}
+/* Hover effect - darkening */
+.button:hover {
+  opacity: 0.8;
+}
+
+/* Active (clicked) effect */
+.button:active {
+  opacity: 0.5;
+  transform: translateY(2px);
+}
+
+.edit-button {
+  background-color: orange; /* Blue background color */
+  color: #fff; /* White text color */
+  border: none; /* Remove the button border */
+  cursor: pointer; /* Add a pointer cursor on hover */
+}
+
+.create-invoice {
+  background-color: #4caf50; /* Green color for Create Invoice button */
+  color: white;
+}
+
+.send-invoice {
+  background-color: #3498db; /* Blue color for Send Invoice button */
+  color: white;
+}
+
+.close-modal {
+  background-color: #f44336; /* Red color for Close button */
+  color: white;
+}
+
+.client-details-table {
+  width: 100%;
+}
+
+.client-details-table .table-label {
+  font-weight: bold;
+}
+
+.client-details-table td {
+  border: none;
+  font-size: 22px;
+}
+.client-details-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+/* Add this CSS for the notes section */
+.job-page-content .notes {
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.job-page-content .notes h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.job-page-content .notes p {
+  font-size: 16px;
+  margin: 10px 0;
 }
 
 .job-page-edit-button {
@@ -229,14 +313,35 @@ select {
   background-color: lightblue;
 }
 
-.exit-button {
-  background-color: red;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 0 5px;
-  color: white;
-  text-align: center;
-  align-self: center;
+/* CSS for table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  background-color: #fafafa;
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* Additional styling as needed */
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
 }
 
 .invoice-link-container {
@@ -265,7 +370,7 @@ select {
   align-items: center;
 }
 .check-box-box {
-  margin: 15px 15px 15px 0px;
+  margin: 15px 10px 15px 0px;
   width: 35px;
   height: 35px;
   border: 2px solid var(--border);
@@ -275,6 +380,13 @@ select {
 
 .checked {
   background-color: var(--highlighted);
+}
+
+.check-box-title {
+  font-size: 20px;
+  margin: 0;
+  margin-right: 2vw;
+  font-weight: 600;
 }
 /* checkbox */
 
@@ -393,6 +505,59 @@ td {
   transform: rotate(180deg);
 }
 /* Table */
+
+/* send email modal */
+/* Add these styles to your component's CSS file */
+.send-email-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.send-email-modal .modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.send-email-modal .close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: red;
+}
+
+.send-email-modal input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.send-email-modal button {
+  background-color: #0074d9;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.send-email-modal button:hover {
+  background-color: #0056b3;
+}
+
+/* send email modal */
 
 /* CSS RESET */
 /* Box sizing rules */

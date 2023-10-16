@@ -6,7 +6,10 @@ import Calendar from "./components/Calendar";
 import Table from "./components/Table";
 import FlowerNotificationBox from "./components/FlowerNotificationBox";
 import apiUrl from "./api_urls.json";
-const API_BASE = apiUrl.api_url;
+//if apiUrls.json development is false, set API_BASE to production url
+const API_BASE = apiUrl.development
+  ? apiUrl.api_url_development
+  : apiUrl.api_url;
 function App() {
   //Store list of all jobs fetched from DB
   const [jobs, setJobs] = useState([]);
@@ -84,7 +87,7 @@ function App() {
             <JobForm
               jobs={jobs}
               setJobs={setJobs}
-              job={{ linen: [], napkins: [] }}
+              job={{ linen: [], napkins: [], items: [] }}
               setJobFormModalActive={setJobFormModalActive}
               fetchJobs={getJobs}
               linenList={linenList}

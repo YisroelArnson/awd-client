@@ -2,10 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import LinenInput from "./LinenInput";
 import NapkinInput from "./NapkinInput";
+import ItemInput from "./ItemInput";
 import CheckBox from "./CheckBox";
 import apiUrl from "../api_urls.json";
-const API_BASE = apiUrl.api_url;
-
+//if apiUrls.json development is false, set API_BASE to production url
+const API_BASE = apiUrl.development
+  ? apiUrl.api_url_development
+  : apiUrl.api_url;
 export default function JobForm(props) {
   //job: state to store job info as its added
   const [job, setJob] = useState(props.job);
@@ -42,6 +45,23 @@ export default function JobForm(props) {
     let temp = job.napkins;
     temp[index] = { unique_id: unique_id, count: parseInt(count) };
     setJob({ ...job, napkins: temp });
+  };
+
+  const updateItemInput = (index, item_name, count, price) => {
+    console.log("Updating item...............");
+    let temp = job.items;
+    temp[index] = {
+      item_name: item_name,
+      count: parseInt(count),
+      price: parseInt(price),
+    };
+    setJob({ ...job, items: temp });
+  };
+
+  const addItemInput = () => {
+    let temp = job.items;
+    temp.push({ item_name: "", count: 1, price: 0 });
+    setJob({ ...job, items: temp });
   };
 
   //--------------------API-------------------------//
@@ -155,6 +175,7 @@ export default function JobForm(props) {
           Wedding
         </div>
         <div id="linen-container">
+          <h2>Linen</h2>
           {job.linen.length != 0
             ? job.linen.map((linen, index) => {
                 return (
@@ -177,6 +198,7 @@ export default function JobForm(props) {
         >
           Add linen
         </div>
+        <h2>Napkins</h2>
         <div id="napkin-container">
           {job.napkins.length != 0
             ? job.napkins.map((napkin, index) => {
@@ -200,6 +222,34 @@ export default function JobForm(props) {
         >
           Add Napkin
         </div>
+        {/* /////// Add other types of items, like bedeken or center pieces */}
+        <h2>Items</h2>
+        <div id="item-container">
+          {console.log(job.items)}
+          {job.items.length != 0
+            ? job.items.map((item, index) => {
+                return (
+                  <ItemInput
+                    item={item}
+                    index={index}
+                    key={index}
+                    napkinsList={props.napkinsList}
+                    updateItemInput={updateItemInput}
+                  />
+                );
+              })
+            : addItemInput()}
+        </div>
+        <div
+          className="add-napkin-button"
+          onClick={() => {
+            addItemInput();
+          }}
+        >
+          Add Item
+        </div>
+
+        {/* Add other types of items ////// */}
         <h3 className="type-of-client-title">type of client</h3>
         <div
           className={
@@ -232,6 +282,15 @@ export default function JobForm(props) {
           name="client_email"
           value={job.client_email}
           placeholder="Client Email"
+          onChange={handleChange}
+        ></input>
+        <h3 className="title">Client Phone</h3>
+        <input
+          className="client-phone-input"
+          type="text"
+          name="client_phone_number"
+          value={job.client_phone_number}
+          placeholder="Client Phone Number"
           onChange={handleChange}
         ></input>
         <h3 className="title">Deposit Amount</h3>

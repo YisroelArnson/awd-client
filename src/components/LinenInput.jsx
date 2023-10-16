@@ -15,7 +15,6 @@ function LinenInput(props) {
 
   return (
     <div index={props.index}>
-      <h2>Linen</h2>
       <select onChange={(event) => onSelect(event)}>
         <option value={select}>{props.linen.unique_id}</option>
         {props.linenList?.slice(1).map((option, index) => (

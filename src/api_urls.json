@@ -1,3 +1,5 @@
 {
+  "development": false,
+  "api_url_development": "http://localhost:3001",
   "api_url": "https://awd-api-mdi9.onrender.com"
 }
